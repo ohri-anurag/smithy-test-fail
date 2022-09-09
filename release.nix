@@ -1,0 +1,1 @@
+derivation { name = "test-fail"; builder = "doesn't exist"; system = builtins.currentSystem; }
