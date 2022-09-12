@@ -18,5 +18,6 @@ nixpkgs.stdenv.mkDerivation {
     echo "${nixpkgsDiamond.stdenv.system}" > $out/system
     now="$(date)"
     printf "Current date and time %s\n" "$now"
+    exit 1
   '';
 }
