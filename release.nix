@@ -6,18 +6,12 @@ let
         sha256 = "0x5j9q1vi00c6kavnjlrwl3yy1xs60c34pkygm49dld2sgws7n0a";
       };
     in import src {};
-  nixpkgsDiamond = import <nixpkgs> {};
-  lol = "pay no attention to this let-binding!!1";
 in
-nixpkgs.stdenv.mkDerivation {
-  name = "test-repo-smithy";
-  src = ./data;
-  installPhase = ''
-    mkdir -p $out
-    cp data.bin $out/
-    echo "${nixpkgsDiamond.stdenv.system}" > $out/system
-    now="$(date)"
-    printf "Current date and time %s\n" "$now"
-    exit 1
-  '';
+with nixpkgs;
+derivation {
+  name = "simple";
+  builder = "${bash}/bin/bash";
+  args = [ ./simple_builder.sh ];
+  inherit coreutils;
+  system = builtins.currentSystem;
 }
